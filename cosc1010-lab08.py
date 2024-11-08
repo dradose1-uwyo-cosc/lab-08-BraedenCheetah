@@ -75,6 +75,8 @@ print("*" * 75)
 # Remember all inputs are strings, but the function needs ints or floats
 # Call your function and print the resulting list
 
+# I can start by making it so the lower bound is checked to be less than the upper bound and returns as an invalid value if it is mroe than the upper bound
+
 def point_slope_intercept(m, b, lower_x_val, upper_x_val):
 
     if lower_x_val > upper_x_val:
@@ -89,6 +91,7 @@ def point_slope_intercept(m, b, lower_x_val, upper_x_val):
 
         y_vals.append(y)
 
+# I can make it so that there is the equation that is produced and used to find the upper and lower bounds
 
     return y_vals
 
@@ -100,7 +103,11 @@ while True:
 
         break
 
+# I can use the try statment to help me separate the parts out and assign individual values to each
+
     try: 
+
+# I can turn the 'm' and 'b' into floats and the bounds into integers so that they are applicable in the program
 
         slope_str, intercept_str, lower_str, upper_str = user_input.split()
 
@@ -111,6 +118,8 @@ while True:
         lower_x_val = int(lower_str)
 
         upper_x_val = int(upper_str)
+
+# I can set the result to be the result of the equation and have it calculate the bounds for me
 
         result = point_slope_intercept(m, b, lower_x_val, upper_x_val)
 
@@ -146,3 +155,55 @@ def sqr_root(x):
     return x ** 0.5
 
 def quadratic_calculator(a, b, c):
+
+    equation = b**2 - 4*a*c
+
+    sqr_rt_equation = sqr_root(equation)
+
+    if sqr_rt_equation is None:
+
+        print("The equation has complex roots.")
+
+        return None, None
+    
+    root_1 = (-b + sqr_rt_equation) / (2 * a)
+
+    root_2 = (-b - sqr_rt_equation) / (2 * a)
+
+    return root_1, root_2
+
+while True:
+
+    try:
+
+        a = float(input("Please enter a value (non-zero): "))
+
+        if a == 0:
+
+            print("Please try again. 'a' must be a non-zero for the quadratic equation")
+
+            continue
+
+        b = float(input("Enter the value of 'b': "))
+        
+        c = float(input("Enter the value of 'c': "))
+
+        root_1, root_2 = quadratic_calculator(a, b, c)
+
+        if root_1 is not None:
+
+            print(f"The roots of the equation are: {root_1} and {root_2}")
+
+        else:
+
+            print("No Solutions. There is no solution that satisfies the input values.")
+
+        continuation = input("Would you like to continue with another euqation? (yes/no): ").strip().lower()
+
+        if continuation != 'yes':
+
+            break
+
+    except:
+
+        print("Invalid value. Please try again.")
