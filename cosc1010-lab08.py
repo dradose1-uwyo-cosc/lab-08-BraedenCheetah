@@ -3,7 +3,7 @@
 # 11/7/2024
 # Lab 08
 # Lab Section: 13
-# Sources, people worked with, help given to:
+# Sources, people worked with, help given to: Matthew Curl, Austin Barner
 # your
 # comments
 # here
@@ -14,46 +14,45 @@
 # Other wise return the converted int or float 
 # Floats should only have one decimal point in them 
 
-# I can start by converting the values into integer and use a try statement to check if the value can be converted and if it doesn't then the program goes on to check for a float
+def value_converter(num):
 
-def value_conversion(v):
+    isNegative = False
 
-    try:
+    if "-" in num:
 
-        return int(v)
+        isNeg = True
+
+        num = num.replace("-", "")
     
-    except ValueError:
+    if "." in num:
 
-        pass
+        num_list = num.split(".")
 
-# I have to check to see if the float value has only one decimal so that there isn't an incorrect value
+    if len(num_list) == 2 and num_list[0].isdigit() and num_list[1].isdigit():
 
-# I also have to count the decimal places within the float
+        if isNegative:
 
-    try:
-        
-        value_float = float(v)
+            return -1 * float(num)
 
-        if '.' in v:
+        else:
 
-            if len(v.split('.')[1]) == 1:
-                
-                return float(v)
+            return float(num)
+            
+    elif num.isdigit():
 
-            else:
+        if isNegative:
 
-                return False
+            return -1 * int(num)
 
         else:
 
             return False
-    
-    except ValueError:
+
+    else:
 
         return False
 
 print("*" * 75)
-
 
 # Point-slope y = mx + b
 # This is used in mathematics to determine what the value y would be for any given x
@@ -97,7 +96,7 @@ def point_slope_intercept(m, b, lower_x_val, upper_x_val):
 
 while True:
 
-    user_input = input("Please enter a slope (m), a y-intercept (b), a lower bound (x1), and an upper bound (x2) or type 'exit' to quit: ")
+    user_input = input("Please enter a slope (m), a y-intercept (b), a lower bound (x1), and an upper bound (x2) (put a space between each input value) or type 'exit' to quit: ")
 
     if user_input.lower() == 'exit':
 
@@ -146,6 +145,8 @@ print("*" * 75)
 # Create a second function that just does the square root operation 
     # If the number you are trying to take the square root of is negative, return null
 
+# I can create a def for the square root operation and make it so the return is 'None' for if the input value is less than zero
+
 def sqr_root(x):
 
     if x < 0:
@@ -154,9 +155,11 @@ def sqr_root(x):
 
     return x ** 0.5
 
+# I can then make a def for the quadratic function calculator I want and use the previous square root to add it into the equation
+
 def quadratic_calculator(a, b, c):
 
-    equation = b**2 - 4*a*c
+    equation = b ** 2 - 4 * a * c
 
     sqr_rt_equation = sqr_root(equation)
 
@@ -172,11 +175,15 @@ def quadratic_calculator(a, b, c):
 
     return root_1, root_2
 
+# I can make a while loop to have the user input the values they wish and change the roots into usable variables
+
+# Making sure that they are float numbers and work well makes it so they are able to be ran in the code
+
 while True:
 
     try:
 
-        a = float(input("Please enter a value (non-zero): "))
+        a = float(input("To start the Quadratic Equation, please enter a value (non-zero) for 'a': "))
 
         if a == 0:
 
